@@ -1,0 +1,38 @@
+# AI usage disclosure
+
+## Tool used
+Claude (Anthropic), via the claude.ai chat interface. No other AI tools were used.
+The application itself also calls the Claude API at runtime for the incident copilot .
+
+## Where AI accelerated my work
+Claude produced almost all first-draft code in this repository: the physics model, the data generator and validation, the MySQL schema and loader, the feature builder and classifier, the Flask API, the React UI and CSS, and the first drafts of the README and design notes. It also proposed the project framing (process fault vs sensor fault) and the evaluation approach.
+
+## Where I relied on it heavily
+Essentially all implementation. I am not claiming the code was hand-written. The value I added is in running, checking, debugging and understanding it .
+
+## What I personally did, reviewed, changed and validated
+- Ran the full stack on my own machine (Windows, PowerShell, MySQL 8): data generation, MySQL load, API, UI.
+- Hit and fixed three real errors: (1) Linux `export` syntax does not work in PowerShell, so I switched to `$env:` variables; (2) the schema loader skipped the first `CREATE TABLE` because of a leading comment, which broke the foreign key to `facility`; (3) the API crashed serializing plain dates to JSON (`date.isoformat()` takes no `sep` argument). Each fix was applied to the code.
+- Exercised the What-if simulator and checked the stored run in MySQL (`SIM-2026-000015`, the first run written through the API).
+- Checked the repository for secrets before publishing (none; credentials come from environment variables).
+- read  `ml.py` line by line; ran the leak / blockage / degradation scenarios; reviewed every endpoint in `app.py`.
+
+## Understanding and ownership
+I walked through the Machine Agorithm used in the project, and I'm still learning the Generative AI used.
+
+## Prompt history
+
+
+1. > I want you to build an AI working model with complete fullstack(react,flask,mysql) with AI involved...that should be with great css which gives the visual representation of the overall workflow which is user friendly.
+2. > is this project good for the role of forward deploy ai engineer
+3. > how to execute this
+4. [Pasted PowerShell output: `export : The term 'export' is not recognized...` followed by `pymysql.err.OperationalError: (1045, "Access denied for user 'root'@'localhost' (using password: "your password")")`]
+5. [Pasted PowerShell session: setting `$env:DB_USER="root"` and `$env:DB_PASSWORD="<redacted>"`, then `python load_mysql.py` failing with `pymysql.err.OperationalError: (1824, "Failed to open the referenced table 'facility'")`]
+6. > done next
+7. [Pasted `python app.py` log: repeated `TypeError: date.isoformat() takes no keyword arguments` on `GET /api/overview`]
+8. [Uploaded 2 screenshots: the What-if simulator page at localhost:5173, and `127.0.0.1:5000` returning "Not Found"]
+9. > done
+10. > what is the complete tech stack
+11.  Add a README explaining how to run it 
+
+
