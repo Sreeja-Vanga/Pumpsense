@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # PumpSense: is the plant failing, or is the sensor lying?
 
 Synthetic pump / tank / valve network with a fault classifier, a what-if simulator and an incident copilot.
@@ -75,3 +76,4 @@ Starter scale (same generator, smaller): `python generate.py --fac 1 --pumps 4 -
 
 ## Data provenance
 Fully synthetic. No external data, no licences, no personal information. Credentials are read from environment variables only.
+=======
