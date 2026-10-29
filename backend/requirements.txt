@@ -1,0 +1,8 @@
+flask
+flask-cors
+pymysql
+cryptography
+pandas
+numpy
+scikit-learn
+anthropic
